@@ -11,6 +11,7 @@
 \RequirePackage{ifluatex}
 \RequirePackage{ifxetex}
 \RequirePackage{calc}
+\RequirePackage{tikz}
 \hypersetup{colorlinks=true, linkcolor=darkgray, urlcolor=tudark}
 
 
@@ -78,33 +79,33 @@
 
 \setbeamertemplate{footline}
 {%
+  \leavevmode
+  \begin{beamercolorbox}[
+    wd=0.3\paperwidth,
+    ht=4ex,
+    dp=10pt,
+    leftskip=\beamer@leftmargin,
+  ]{author in head/foot}%
+    {\usebeamerfont{author in head/foot}\insertshortauthor~\textbar~}%
+    {\usebeamerfont{date in head/foot}\insertshortdate}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[
+    wd=0.5\paperwidth,
+    ht=3ex,
+    dp=10pt,
+    center,
+  ]{section in head/foot}%
+    \ifx\insertsection\empty%
+    \else%
+      \usebeamerfont{section in head/foot}\insertsection%
+      \ifx\insertsubsection\empty
+      \else%
+        :~\usebeamerfont{subsection in head/foot}\insertsubsection%
+      \fi
+    \fi%
+  \end{beamercolorbox}%
   \ifnum\insertframenumber=1%
   \else%
-    \leavevmode
-    \begin{beamercolorbox}[
-      wd=0.3\paperwidth,
-      ht=4ex,
-      dp=10pt,
-      leftskip=\beamer@leftmargin,
-    ]{author in head/foot}%
-      {\usebeamerfont{author in head/foot}\insertshortauthor~\textbar~}%
-      {\usebeamerfont{date in head/foot}\insertshortdate}%
-    \end{beamercolorbox}%
-    \begin{beamercolorbox}[
-      wd=0.5\paperwidth,
-      ht=3ex,
-      dp=10pt,
-      center,
-    ]{section in head/foot}%
-      \ifx\insertsection\empty%
-      \else%
-        \usebeamerfont{section in head/foot}\insertsection%
-        \ifx\insertsubsection\empty
-        \else%
-          :~\usebeamerfont{subsection in head/foot}\insertsubsection%
-        \fi
-      \fi%
-    \end{beamercolorbox}%
     \begin{beamercolorbox}[
       wd=0.2\paperwidth,
       ht=4ex,
@@ -123,43 +124,47 @@
 % \def\titlepage{\usebeamertemplate{title page}}
 \setbeamertemplate{title page}
 {
-  \ifx\inserttitlegraphi\empty%
-  \else%
-  \begin{beamercolorbox}[center, wd=\textwidth]{titlegraphic}
-    \inserttitlegraphic%
-  \end{beamercolorbox}%
-  \vspace{10pt}%
-  \fi%
+  %\begin{minipage}[b][\paperheight]{\textwidth}
   \ifx\inserttitle\empty%
   \else%
-  \begin{beamercolorbox}[wd=\textwidth, dp=1ex]{title}
-    \textcolor{tugreen}{\rule{\textwidth}{1pt}}\\%
-    \centering\usebeamerfont{title}\inserttitle\\[-0.5\baselineskip]%
-    \textcolor{tugreen}{\rule{\textwidth}{1pt}}%
+  \begin{beamercolorbox}[center, wd=\textwidth, dp=1ex]{title}
+    \usebeamerfont{title}\inserttitle\\[-0.5\baselineskip]%
   \end{beamercolorbox}%
-  \vspace{\fill}
+  \vspace*{\fill}
   \fi%
-  \ifx\insertauthor\empty%
-  \else%
-  \begin{beamercolorbox}[leftskip=0.2\textwidth, rightskip=0.2\textwidth, wd=\textwidth]{author}
-    \centering\usebeamerfont{author}\insertauthor%
-  \end{beamercolorbox}%
-  \vspace{1ex}%
-  \fi%
-  \ifx\insertdate\empty%
-  \else%
-  \begin{beamercolorbox}[leftskip=0.2\textwidth, rightskip=0.2\textwidth, wd=\textwidth]{date}
-    \centering\usebeamerfont{date}\insertdate%
-  \end{beamercolorbox}%
-  \vspace{1ex}%
-  \fi%
-  \ifx\insertinstitute\empty%
-  \else%
-  \begin{beamercolorbox}[leftskip=0.2\textwidth, rightskip=0.2\textwidth, wd=\textwidth]{institute}
-    \centering\usebeamerfont{institute}\insertinstitute%
-  \end{beamercolorbox}%
-  \fi%
-  \vspace{\fill}
+  \def\titlebulletsize{\textwidth/8}% Size of the bullets in the title
+  \def\titlecornerradius{\textwidth/68}% Radius for the bullet corners
+  \def\titlebulletspacing{\textwidth/48}% Space inbetween bullets
+  \begin{tikzpicture}[overlay, remember picture, shift={(current page.south west)}, xshift=\beamer@leftmargin, yshift=4ex+10pt]
+    \begin{scope}
+      \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize); 
+      \node [rectangle, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {\includegraphics[width=\titlebulletsize]{images/tudo-title-1.jpg}};
+    \end{scope}
+    \begin{scope}[xshift=\titlebulletsize + \titlebulletspacing]
+      \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
+      \node [rectangle, fill=tugreen, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {};
+    \end{scope}
+    \begin{scope}[xshift=2*(\titlebulletsize + \titlebulletspacing)]
+      \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
+      \node [rectangle, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {\includegraphics[width=\titlebulletsize]{images/tudo-title-2.jpg}};
+    \end{scope}
+    \begin{scope}[xshift=3*(\titlebulletsize + \titlebulletspacing)]
+      \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
+      \node [rectangle, fill=black!30, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {};
+    \end{scope}
+    \begin{scope}[xshift=4*(\titlebulletsize + \titlebulletspacing)]
+      \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize); 
+      \node [rectangle, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {\includegraphics[width=\titlebulletsize]{images/tudo-title-3.jpg}};
+    \end{scope}
+    \begin{scope}[xshift=5*(\titlebulletsize + \titlebulletspacing)]
+      \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
+      \node [rectangle, fill=black!11, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {};
+    \end{scope}
+    \begin{scope}[xshift=6*(\titlebulletsize + \titlebulletspacing)]
+      \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize); 
+      \node [rectangle, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {\includegraphics[width=\titlebulletsize]{images/tudo-title-4.jpg}};
+    \end{scope}
+  \end{tikzpicture}%
 }
 
 \setbeamertemplate{itemize items}[square]
