@@ -72,13 +72,7 @@
   \usebeamerfont{institute in head/foot}\hfill\insertshortinstitute[respectlinebreaks]
   \end{beamercolorbox}%
   \vskip2ex%
-  \ifnum\insertframenumber=1%
-    \vspace{0.4pt}%
-  \else%
-    \hspace{\beamer@leftmargin}%
-    \usebeamercolor{separation line}%
-    \rule{\paperwidth-\beamer@leftmargin-\beamer@rightmargin}{0.4pt}%
-  \fi
+  \textcolor{tugreen}{\rule{\paperwidth}{0.4pt}}%  
   \vskip2ex
 }
 
@@ -88,16 +82,16 @@
   \else%
     \leavevmode
     \begin{beamercolorbox}[
-      wd=0.2\paperwidth,
+      wd=0.3\paperwidth,
       ht=4ex,
       dp=10pt,
       leftskip=\beamer@leftmargin,
     ]{author in head/foot}%
-      {\usebeamerfont{author in head/foot}\insertshortauthor} | 
+      {\usebeamerfont{author in head/foot}\insertshortauthor\ \textbar\ }%
       {\usebeamerfont{date in head/foot}\insertshortdate}%
     \end{beamercolorbox}%
     \begin{beamercolorbox}[
-      wd=0.6\paperwidth,
+      wd=0.5\paperwidth,
       ht=3ex,
       dp=10pt,
       center,
@@ -117,10 +111,10 @@
       dp=10pt,
       rightskip=\beamer@rightmargin,
     ]{frame}%
-      \hfill\usebeamerfont{framenumber}\insertframenumber%
+      \hfill{\usebeamerfont{framenumber}\usebeamercolor[fg]{framenumber}\insertframenumber%
       \if@showtotalframes
         ~/~\inserttotalframenumber%
-      \fi%
+      \fi}%
     \end{beamercolorbox}%
   \fi%
 }
@@ -181,7 +175,7 @@
 \setbeamerfont{date}{size=\large, series=\bfseries}
 
 \setbeamerfont{frametitle}{size=\large, series=\bfseries}
-\setbeamerfont{framenumber}{series=\bfseries}
+\setbeamerfont{framenumber}{size=\small, series=\bfseries}
 
 \setbeamerfont{institute}{size=\large}
 \setbeamerfont{section in head/foot}{size=\small}
@@ -196,6 +190,9 @@
 
 \setbeamerfont{block title}{series=\bfseries}
 \setbeamerfont{section in toc}{series=\bfseries}
+
+\setbeamerfont{author in head/foot}{size=\small}
+\setbeamerfont{date in head/foot}{size=\small}
 
 
 %% colors
