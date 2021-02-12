@@ -129,8 +129,7 @@
   % We neglect title graphics, as we are not willing to allow them
   \ifx\inserttitle\empty\else%
   \begin{beamercolorbox}[center, wd=\textwidth, dp=1ex]{title}
-    \textcolor{tugreen}{\rule{\textwidth}{1pt}}\\[0.5\baselineskip]%
-    \usebeamerfont{title}\inserttitle
+    \usebeamerfont{title}\textcolor{tugreen}{\inserttitle}
     \ifx\insertsubtitle\empty%
       \newline%
     \else%
@@ -138,7 +137,6 @@
       \usebeamerfont{subtitle}%
       \insertsubtitle\newline%
     \fi%
-    \textcolor{tugreen}{\rule{\textwidth}{1pt}}%
   \end{beamercolorbox}%
   \vspace{\fill}
   \fi%
