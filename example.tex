@@ -34,59 +34,56 @@
 
 \title{\LaTeX-Beamer-Theme der TU~Dortmund}
 \subtitle{A nice template for presentations of ie\textsuperscript{3} institute}
-\author[M.~Nöthe]{Maximilian Nöthe}
-\institute[Kurzform Lehrstuhl]{Names des Lehrstuhls \\  Name der Fakultät}
+\author[Prof.~K.-D.~Brokkoli]{Univ.-Prof.~Dr.~{}rer.~hort.~Klaus-Dieter~Brokkoli}
+% \author[Univ.-Prof.~Dr.~rer.~hort.~K.-D.~Brokkoli]{Univ.-Prof.~Dr.~{}rer.~hort.~Klaus-Dieter~Brokkoli}
+\institute[ie\textsuperscript{3}]{Institute of Energy Systems, Energy Efficiency and Energy Economics}
 
 \begin{document}
 
 \maketitle
 
-\begin{frame}{Hinweise}
-  Zu diesem Theme
+\begin{frame}{How to use}
+  Props to contributors \href{https://github.com/maxnoe}{Maximilian N\"othe} and \href{https://github.com/bernharddick}{Bernhard Dick} for the ground-laying work on this theme!
+  
+  \medskip
+  To install this theme on your system, at least \texttt{beamerthemetudo.sty} and the provided directory \texttt{logos} have to be in a place, where \LaTeX is able to find those packages.
+  This is one of either:
   \begin{itemize}
-    \item Zur Installation des Themese muss mindestens die Datei \texttt{beamerthemetudo.sty} und der Ordner \texttt{logos} in einen Ordner verschoben werden, in dem \LaTeX nach Paketen sucht.
-      Dies können sein
-      \begin{itemize}
-        \item \texttt{TEXMFHOME/tex/latex/tudobeamertheme}. Den Wert von \texttt{TEXMFHOME} bekommen sie über \texttt{kpsewhich --var-value TEXMFHOME}, üblicherweise ist dies \texttt{\$HOME/texmf}.
-        \item Der gleiche Ordner in dem Sie ihr Dokument kompilieren
-        \item Ein beliebiger Ordner, der in der Variablen \texttt{TEXINPUTS} enthalten ist.
-      \end{itemize}
+    \item \texttt{TEXMFHOME/tex/latex/tudobeamertheme}. You may find the location of \texttt{TEXMFHOME} with \texttt{kpsewhich --var-value TEXMFHOME}, typically it's at \texttt{\$HOME/texmf}.
+    \item The same directory, your document to compile is in.
+    \item Any other place, that is added to \texttt{TEXINPUTS}.
   \end{itemize}
   
-  Oneliner zur Installation:\\
-  \texttt{\footnotesize\$ cd `kpsewhich --var-value TEXMFHOME` \&\& git clone https://github.com/maxnoe/tudobeamertheme}
+  \medskip
+  You may install the template with this single line command:\\
+  \texttt{\footnotesize\$ cd `kpsewhich --var-value TEXMFHOME` \&\& git clone https://github.com/ie3-institute/tudobeamertheme}
 
   \medskip
-  Allgemein zu Beamer und Latex:
+  Additional information about \LaTeX and Beamer may be found at:
   \begin{itemize}
-    \item Umfangreicher \LaTeX-Kurs von PeP et Al. \\
+    \item Extensive \LaTeX course by PeP et Al. \\
       \url{http://toolbox.pep-dortmund.org/notes}
-    \item Latex-Beamer Dokumetation:\\
+    \item \LaTeX-Beamer documentation:\\
     \url{http://www.ctan.org/pkg/beamer}
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Einführung}
-  \tableofcontents
+\begin{frame}{Additional Features}
+  There are two options available to alter the appearance of your slides:
+
+  \medskip
+  If you place \texttt{logos/chair.pdf} in one of the above mentioned places, the abbreviation of your chair is replaced by this logo.
+
+  \medskip
+  If you place \texttt{images/tudo-title-1.jpg} to \texttt{images/tudo-title-4.jpg} in one of the above mentioned places, the first, thrid, fifth and seventh box on the title page will be replaced by this picture.
 \end{frame}
 
-\section{Fonts}
-\begin{frame}
-  Der Font der im Corporate Design der TU Dortmund vorgesehen ist,
-  ist \enquote{Akkurat Office}.
+\begin{frame}{Fonts}
+  As of Coporate Design of TU Dortmund university, \enquote{Akkurat Office} is the foreseen font to use.
 
-  Falls dieser nicht verfügbar ist, wird als Alternative \enquote{Fira Sans}
-  verwendet.
-
-  Für Mathematik wird bei Verwendung von \texttt{xelatex} oder \texttt{lualatex} der Font \enquote{Fira Math} verwendet.
-\end{frame}
-
-\begin{frame}{Mathe}
-  \begin{align*}
-    \nabla \cdot \symbf{B} &= 0 &
-    \nabla \cdot \symbf{E} &= \frac{ρ}{ε_0} \\
-    \nabla \times \symbf{E} &= -\partial_t \symbf{B} &
-    \nabla \times \symbf{B} &= μ_0 \symbf{j} + μ_0 ε_0 \partial_t \symbf{E} &
-  \end{align*}
+  If that one isn't available, alternatively \enquote{Fira Sans} is used.
+  So make sure, you have at least one of both installed.
+  
+  For mathematical typesetting, \enquote{Fira Math} is the font of choice, if you compile using \texttt{xelatex} or \texttt{lualatex}.
 \end{frame}
 \end{document}

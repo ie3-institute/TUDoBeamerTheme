@@ -1,4 +1,9 @@
 # LaTeX Beamer Theme for the TU Dortmund, Germany
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/ie3-institute/TUDoBeamerTheme)
+![GitHub issues](https://img.shields.io/github/issues-raw/ie3-institute/TUDoBeamerTheme)
+![GitHub repo size](https://img.shields.io/github/repo-size/ie3-institute/TUDoBeamerTheme)
+
+![](images/teaser.png)
 
 It follows the Corporate Design of the Powerpoint Templates the TU Dortmund supplies.
 
