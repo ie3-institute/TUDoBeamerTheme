@@ -74,7 +74,12 @@
     leftskip=1em,
     rightskip=\beamer@rightmargin,
   ]{headline}%
-  \usebeamerfont{institute in head/foot}\hfill\insertshortinstitute[respectlinebreaks]
+    \hfill%
+    \IfFileExists{logos/chair.pdf}{
+      \includegraphics[height=\headerheight]{logos/chair.pdf}%
+    }{
+      \usebeamerfont{institute in head/foot}\insertshortinstitute[respectlinebreaks]%
+    }
   \end{beamercolorbox}%
   \vskip2ex%
   \textcolor{tugreen}{\rule{\paperwidth}{0.4pt}}%  
@@ -160,8 +165,11 @@
   \begin{tikzpicture}[overlay, remember picture, shift={(current page.south west)}, xshift=\beamer@leftmargin, yshift=4ex+10pt]
     \begin{scope}
       \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
-      \node [rectangle, fill=tugreengrad5, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {};
-      % \node [rectangle, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {\includegraphics[width=\titlebulletsize]{images/tudo-title-1.jpg}};
+      \IfFileExists{images/tudo-title-1.jpg}{
+        \node [rectangle, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {\includegraphics[width=\titlebulletsize]{images/tudo-title-1.jpg}};
+      }{
+        \node [rectangle, fill=tugreengrad5, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {};
+      }
     \end{scope}
     \begin{scope}[xshift=\titlebulletsize + \titlebulletspacing]
       \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
@@ -169,8 +177,11 @@
     \end{scope}
     \begin{scope}[xshift=2*(\titlebulletsize + \titlebulletspacing)]
       \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
-      \node [rectangle, fill=tugreengrad2, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {};
-      % \node [rectangle, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {\includegraphics[width=\titlebulletsize]{images/tudo-title-2.jpg}};
+      \IfFileExists{images/tudo-title-2.jpg}{
+        \node [rectangle, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {\includegraphics[width=\titlebulletsize]{images/tudo-title-2.jpg}};
+      }{
+        \node [rectangle, fill=tugreengrad2, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {};
+      }
     \end{scope}
     \begin{scope}[xshift=3*(\titlebulletsize + \titlebulletspacing)]
       \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
@@ -178,8 +189,11 @@
     \end{scope}
     \begin{scope}[xshift=4*(\titlebulletsize + \titlebulletspacing)]
       \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
-      \node [rectangle, fill=tugreengrad3, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {};
-      % \node [rectangle, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {\includegraphics[width=\titlebulletsize]{images/tudo-title-3.jpg}};
+      \IfFileExists{images/tudo-title-3.jpg}{
+        \node [rectangle, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {\includegraphics[width=\titlebulletsize]{images/tudo-title-3.jpg}};
+      }{
+        \node [rectangle, fill=tugreengrad3, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {};
+      }
     \end{scope}
     \begin{scope}[xshift=5*(\titlebulletsize + \titlebulletspacing)]
       \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
@@ -187,8 +201,11 @@
     \end{scope}
     \begin{scope}[xshift=6*(\titlebulletsize + \titlebulletspacing)]
       \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
-      \node [rectangle, fill=tugreengrad1, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {};
-      % \node [rectangle, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {\includegraphics[width=\titlebulletsize]{images/tudo-title-4.jpg}};
+      \IfFileExists{images/tudo-title-4.jpg}{
+        \node [rectangle, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {\includegraphics[width=\titlebulletsize]{images/tudo-title-4.jpg}};
+      }{
+        \node [rectangle, fill=tugreengrad1, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {};
+      }
     \end{scope}
   \end{tikzpicture}%
 }
