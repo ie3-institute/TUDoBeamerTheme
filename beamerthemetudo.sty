@@ -126,15 +126,9 @@
 
 \setbeamertemplate{title page}
 {
-  \ifx\inserttitlegraphic\empty%
-  \else%
-  \begin{beamercolorbox}[center, wd=\textwidth]{titlegraphic}
-    \inserttitlegraphic%
-  \end{beamercolorbox}%
-  \vspace{10pt}%
-  \fi%
+  % We neglect title graphics, as we are not willing to allow them
   \ifx\inserttitle\empty\else%
-  \begin{beamercolorbox}[center, wd=\textwidth]{title}
+  \begin{beamercolorbox}[center, wd=\textwidth, dp=1ex]{title}
     \textcolor{tugreen}{\rule{\textwidth}{1pt}}\\[0.5\baselineskip]%
     \usebeamerfont{title}\inserttitle
     \ifx\insertsubtitle\empty%
@@ -167,8 +161,9 @@
   \def\titlebulletspacing{\textwidth/48}% Space inbetween bullets
   \begin{tikzpicture}[overlay, remember picture, shift={(current page.south west)}, xshift=\beamer@leftmargin, yshift=4ex+10pt]
     \begin{scope}
-      \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize); 
-      \node [rectangle, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {\includegraphics[width=\titlebulletsize]{images/tudo-title-1.jpg}};
+      \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
+      \node [rectangle, fill=tugreengrad5, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {};
+      % \node [rectangle, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {\includegraphics[width=\titlebulletsize]{images/tudo-title-1.jpg}};
     \end{scope}
     \begin{scope}[xshift=\titlebulletsize + \titlebulletspacing]
       \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
@@ -176,23 +171,26 @@
     \end{scope}
     \begin{scope}[xshift=2*(\titlebulletsize + \titlebulletspacing)]
       \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
-      \node [rectangle, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {\includegraphics[width=\titlebulletsize]{images/tudo-title-2.jpg}};
+      \node [rectangle, fill=tugreengrad2, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {};
+      % \node [rectangle, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {\includegraphics[width=\titlebulletsize]{images/tudo-title-2.jpg}};
     \end{scope}
     \begin{scope}[xshift=3*(\titlebulletsize + \titlebulletspacing)]
       \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
       \node [rectangle, fill=black!30, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {};
     \end{scope}
     \begin{scope}[xshift=4*(\titlebulletsize + \titlebulletspacing)]
-      \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize); 
-      \node [rectangle, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {\includegraphics[width=\titlebulletsize]{images/tudo-title-3.jpg}};
+      \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
+      \node [rectangle, fill=tugreengrad3, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {};
+      % \node [rectangle, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {\includegraphics[width=\titlebulletsize]{images/tudo-title-3.jpg}};
     \end{scope}
     \begin{scope}[xshift=5*(\titlebulletsize + \titlebulletspacing)]
       \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
       \node [rectangle, fill=black!11, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {};
     \end{scope}
     \begin{scope}[xshift=6*(\titlebulletsize + \titlebulletspacing)]
-      \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize); 
-      \node [rectangle, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {\includegraphics[width=\titlebulletsize]{images/tudo-title-4.jpg}};
+      \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
+      \node [rectangle, fill=tugreengrad1, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {};
+      % \node [rectangle, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {\includegraphics[width=\titlebulletsize]{images/tudo-title-4.jpg}};
     \end{scope}
   \end{tikzpicture}%
 }
@@ -238,6 +236,13 @@
 \xdefinecolor{tuorange}{RGB}{227, 105, 19}      % 3
 \xdefinecolor{tuyellow}{RGB}{242, 189, 0}       % 4
 \xdefinecolor{tucitron}{RGB}{249, 219, 0}       % 5
+
+% Color gradients, base color is "tuGreen"
+\xdefinecolor{tugreengrad1}{RGB}{151, 193, 69}
+\xdefinecolor{tugreengrad2}{RGB}{170, 203, 102}
+\xdefinecolor{tugreengrad3}{RGB}{187, 212, 132}
+\xdefinecolor{tugreengrad4}{RGB}{204, 222, 163}
+\xdefinecolor{tugreengrad5}{RGB}{220, 231, 193}
 
 \setbeamercolor{section in head/foot}{fg=tugreen, bg=white}
 \setbeamercolor{framenumber}{fg=tugreen, bg=white}
