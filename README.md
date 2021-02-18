@@ -14,6 +14,12 @@ To install this into your local TeXLive System so you can use it anywhere withou
 $ git clone https://github.com/ie3-institute/tudobeamertheme $(kpsewhich --var-value TEXMFHOME)/tex/latex/tudobeamertheme
 ```
 
+Aforementioned command typically doesn't work on MikTeX systems.
+Therefore, locate the proper path, e.g. from MikTeX Console GuI and adapt the following line:
+```
+$ git clone https://github.com/ie3-institute/tudobeamertheme "c:/Program Files/MikTeX/tex/latex/tudobeamertheme"
+```
+
 ## Prerequisites
 ### Fonts
 If you intend to compile with LuaLaTeX or XeTeX, your system requires to have some fonts installed.
