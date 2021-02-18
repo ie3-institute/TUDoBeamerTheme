@@ -17,7 +17,9 @@ $ git clone https://github.com/ie3-institute/tudobeamertheme $(kpsewhich --var-v
 Aforementioned command typically doesn't work on MikTeX systems.
 Therefore, locate the proper path, e.g. from MikTeX Console GuI and adapt the following line:
 ```
-$ git clone https://github.com/ie3-institute/tudobeamertheme "c:/Program Files/MikTeX/tex/latex/tudobeamertheme"
+$ git clone \
+        https://github.com/ie3-institute/tudobeamertheme \
+        "c:/Program Files/MikTeX/tex/latex/tudobeamertheme"
 ```
 Afterwards, you need to refresh the filename database (via MikTeX Console).
 
