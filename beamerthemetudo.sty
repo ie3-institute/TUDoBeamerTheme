@@ -5,7 +5,10 @@
 \RequirePackage{ifluatex}
 \RequirePackage{ifxetex}
 \RequirePackage{calc}
-\hypersetup{colorlinks=true, linkcolor=darkgray, urlcolor=tudark}
+\RequirePackage{tikz}
+\RequirePackage{parskip}
+\setlength{\parskip}{12pt} % Add space between paragraphs
+\hypersetup{colorlinks=true, linkcolor=tugray, urlcolor=tudark}
 
 
 \mode<presentation>
@@ -73,75 +76,69 @@
     leftskip=1em,
     rightskip=\beamer@rightmargin,
   ]{headline}%
-  \usebeamerfont{institute in head/foot}\hfill\insertshortinstitute[respectlinebreaks]
+    \hfill%
+    \IfFileExists{logos/chair.pdf}{
+      \includegraphics[height=\headerheight]{logos/chair.pdf}%
+    }{
+      \usebeamerfont{institute in head/foot}\insertshortinstitute[respectlinebreaks]%
+    }
   \end{beamercolorbox}%
   \vskip2ex%
-  \ifnum\insertframenumber=1%
-    \vspace{0.4pt}%
-  \else%
-    \hspace{\beamer@leftmargin}%
-    \usebeamercolor{separation line}%
-    \rule{\paperwidth-\beamer@leftmargin-\beamer@rightmargin}{0.4pt}%
-  \fi
+  \textcolor{tugreen}{\rule{\paperwidth}{0.2pt}}%  
   \vskip2ex
 }
 
 \setbeamertemplate{footline}
 {%
+  \textcolor{tugreen}{\rule{\paperwidth}{0.2pt}}%  
+  \vskip1ex%
+  \leavevmode
+  \begin{beamercolorbox}[
+    wd=0.3\paperwidth,
+    ht=4ex,
+    dp=10pt,
+    leftskip=\beamer@leftmargin,
+  ]{author in head/foot}%
+    {\usebeamerfont{author in head/foot}\insertshortauthor~\textbar~}%
+    {\usebeamerfont{date in head/foot}\insertshortdate}%
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[
+    wd=0.5\paperwidth,
+    ht=3ex,
+    dp=10pt,
+    center,
+  ]{section in head/foot}%
+    \ifx\insertsection\empty%
+    \else%
+      \usebeamerfont{section in head/foot}\insertsection%
+      \ifx\insertsubsection\empty
+      \else%
+        :~\usebeamerfont{subsection in head/foot}\insertsubsection%
+      \fi
+    \fi%
+  \end{beamercolorbox}%
   \ifnum\insertframenumber=1%
   \else%
-    \leavevmode
-    \begin{beamercolorbox}[
-      wd=0.2\paperwidth,
-      ht=4ex,
-      dp=10pt,
-      leftskip=\beamer@leftmargin,
-    ]{author in head/foot}%
-      {\usebeamerfont{author in head/foot}\insertshortauthor} | 
-      {\usebeamerfont{date in head/foot}\insertshortdate}%
-    \end{beamercolorbox}%
-    \begin{beamercolorbox}[
-      wd=0.6\paperwidth,
-      ht=3ex,
-      dp=10pt,
-      center,
-    ]{section in head/foot}%
-      \ifx\insertsection\empty%
-      \else%
-        \usebeamerfont{section in head/foot}\insertsection%
-        \ifx\insertsubsection\empty
-        \else%
-          :~\usebeamerfont{subsection in head/foot}\insertsubsection%
-        \fi
-      \fi%
-    \end{beamercolorbox}%
     \begin{beamercolorbox}[
       wd=0.2\paperwidth,
       ht=4ex,
       dp=10pt,
       rightskip=\beamer@rightmargin,
     ]{frame}%
-      \hfill\usebeamerfont{framenumber}\insertframenumber%
+      \hfill{\usebeamerfont{framenumber}\usebeamercolor[fg]{framenumber}\insertframenumber%
       \if@showtotalframes
         ~/~\inserttotalframenumber%
-      \fi%
+      \fi}%
     \end{beamercolorbox}%
   \fi%
 }
 
 \setbeamertemplate{title page}
 {
-  \ifx\inserttitlegraphic\empty%
-  \else%
-  \begin{beamercolorbox}[center, wd=\textwidth]{titlegraphic}
-    \inserttitlegraphic%
-  \end{beamercolorbox}%
-  \vspace{10pt}%
-  \fi%
+  % We neglect title graphics, as we are not willing to allow them
   \ifx\inserttitle\empty\else%
-  \begin{beamercolorbox}[center, wd=\textwidth]{title}
-    \textcolor{tugreen}{\rule{\textwidth}{1pt}}\\[0.5\baselineskip]%
-    \usebeamerfont{title}\inserttitle
+  \begin{beamercolorbox}[center, wd=\textwidth, dp=1ex]{title}
+    \usebeamerfont{title}\textcolor{tugreen}{\inserttitle}
     \ifx\insertsubtitle\empty%
       \newline%
     \else%
@@ -149,7 +146,6 @@
       \usebeamerfont{subtitle}%
       \insertsubtitle\newline%
     \fi%
-    \textcolor{tugreen}{\rule{\textwidth}{1pt}}%
   \end{beamercolorbox}%
   \vspace{\fill}
   \fi%
@@ -165,15 +161,57 @@
   \begin{beamercolorbox}[leftskip=0.2\textwidth, rightskip=0.2\textwidth, wd=\textwidth]{date}
     \centering\usebeamerfont{date}\insertdate%
   \end{beamercolorbox}%
-  \vspace{1ex}%
+  \vspace*{\fill}
   \fi%
-  \ifx\insertinstitute\empty%
-  \else%
-  \begin{beamercolorbox}[leftskip=0.2\textwidth, rightskip=0.2\textwidth, wd=\textwidth]{institute}
-    \centering\usebeamerfont{institute}\insertinstitute%
-  \end{beamercolorbox}%
-  \fi%
-  \vspace{\fill}
+  \def\titlebulletsize{\textwidth/8}% Size of the bullets in the title
+  \def\titlecornerradius{\textwidth/68}% Radius for the bullet corners
+  \def\titlebulletspacing{\textwidth/48}% Space inbetween bullets
+  \begin{tikzpicture}[overlay, remember picture, shift={(current page.south west)}, xshift=\beamer@leftmargin, yshift=4ex+10pt]
+    \begin{scope}
+      \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
+      \IfFileExists{images/tudo-title-1.jpg}{
+        \node [rectangle, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {\includegraphics[width=\titlebulletsize]{images/tudo-title-1.jpg}};
+      }{
+        \node [rectangle, fill=tugreengrad5, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {};
+      }
+    \end{scope}
+    \begin{scope}[xshift=\titlebulletsize + \titlebulletspacing]
+      \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
+      \node [rectangle, fill=tugreen, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {};
+    \end{scope}
+    \begin{scope}[xshift=2*(\titlebulletsize + \titlebulletspacing)]
+      \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
+      \IfFileExists{images/tudo-title-2.jpg}{
+        \node [rectangle, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {\includegraphics[width=\titlebulletsize]{images/tudo-title-2.jpg}};
+      }{
+        \node [rectangle, fill=tugreengrad2, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {};
+      }
+    \end{scope}
+    \begin{scope}[xshift=3*(\titlebulletsize + \titlebulletspacing)]
+      \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
+      \node [rectangle, fill=black!30, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {};
+    \end{scope}
+    \begin{scope}[xshift=4*(\titlebulletsize + \titlebulletspacing)]
+      \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
+      \IfFileExists{images/tudo-title-3.jpg}{
+        \node [rectangle, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {\includegraphics[width=\titlebulletsize]{images/tudo-title-3.jpg}};
+      }{
+        \node [rectangle, fill=tugreengrad3, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {};
+      }
+    \end{scope}
+    \begin{scope}[xshift=5*(\titlebulletsize + \titlebulletspacing)]
+      \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
+      \node [rectangle, fill=black!11, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {};
+    \end{scope}
+    \begin{scope}[xshift=6*(\titlebulletsize + \titlebulletspacing)]
+      \clip [rounded corners=\titlecornerradius] (0,0) rectangle coordinate (centerpoint) (\titlebulletsize,\titlebulletsize);
+      \IfFileExists{images/tudo-title-4.jpg}{
+        \node [rectangle, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {\includegraphics[width=\titlebulletsize]{images/tudo-title-4.jpg}};
+      }{
+        \node [rectangle, fill=tugreengrad1, inner sep=0pt, minimum size=\titlebulletsize] at (centerpoint) {};
+      }
+    \end{scope}
+  \end{tikzpicture}%
 }
 
 \setbeamertemplate{itemize items}[square]
@@ -189,7 +227,7 @@
 \setbeamerfont{date}{size=\large, series=\bfseries}
 
 \setbeamerfont{frametitle}{size=\large, series=\bfseries}
-\setbeamerfont{framenumber}{series=\bfseries}
+\setbeamerfont{framenumber}{size=\small, series=\bfseries}
 
 \setbeamerfont{institute}{size=\large}
 \setbeamerfont{section in head/foot}{size=\small}
@@ -205,25 +243,36 @@
 \setbeamerfont{block title}{series=\bfseries}
 \setbeamerfont{section in toc}{series=\bfseries}
 
+\setbeamerfont{author in head/foot}{size=\small}
+\setbeamerfont{date in head/foot}{size=\small}
+
 
 %% colors
 \xdefinecolor{tugreen}{RGB}{132, 184, 25}       % 0
 \colorlet{tulight}{tugreen!20!white}
 \colorlet{tudark}{tugreen!60!black}
+\colorlet{tugray}{black!66!white}
 
 \xdefinecolor{tuorange}{RGB}{227, 105, 19}      % 3
 \xdefinecolor{tuyellow}{RGB}{242, 189, 0}       % 4
 \xdefinecolor{tucitron}{RGB}{249, 219, 0}       % 5
 
+% Color gradients, base color is "tuGreen"
+\xdefinecolor{tugreengrad1}{RGB}{151, 193, 69}
+\xdefinecolor{tugreengrad2}{RGB}{170, 203, 102}
+\xdefinecolor{tugreengrad3}{RGB}{187, 212, 132}
+\xdefinecolor{tugreengrad4}{RGB}{204, 222, 163}
+\xdefinecolor{tugreengrad5}{RGB}{220, 231, 193}
+
 \setbeamercolor{section in head/foot}{fg=tugreen, bg=white}
 \setbeamercolor{framenumber}{fg=tugreen, bg=white}
 
-\setbeamercolor{normal text}{fg=darkgray, bg=white}
+\setbeamercolor{normal text}{fg=tugray, bg=white}
 \setbeamercolor{alerted text}{fg=tuorange, bg=white}
-\setbeamercolor{palette primary}{fg=darkgray, bg=white}
+\setbeamercolor{palette primary}{fg=tugray, bg=white}
 \setbeamercolor{palette secondary}{fg=tugreen, bg=white}
 
-\setbeamercolor{title}{fg=darkgray, bg=white}
+\setbeamercolor{title}{fg=tugray, bg=white}
 \setbeamercolor{structure}{fg=tugreen, bg=white}
 
 \setbeamercolor{frametitle}{fg=tugreen, bg=white}
@@ -231,9 +280,9 @@
 \setbeamercolor{item}{fg=tugreen, bg=white}
 
 \setbeamercolor{block title}{fg=white, bg=tugreen}
-\setbeamercolor{block body}{fg=darkgray, bg=tulight}
+\setbeamercolor{block body}{fg=tugray, bg=tulight}
 
 \setbeamercolor{section number in toc}{fg=tugreen, bg=white}
-\setbeamercolor{section in toc}{fg=darkgray, bg=white}
+\setbeamercolor{section in toc}{fg=tugray, bg=white}
 
 \mode<all>
