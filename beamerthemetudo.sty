@@ -8,7 +8,7 @@
 \RequirePackage{tikz}
 \RequirePackage{parskip}
 \setlength{\parskip}{12pt} % Add space between paragraphs
-\hypersetup{colorlinks=true, linkcolor=tugray, urlcolor=tudark}
+\hypersetup{colorlinks=true, citecolor=tudark, linkcolor=tugray, urlcolor=tudark}
 
 
 \mode<presentation>
@@ -284,5 +284,12 @@
 
 \setbeamercolor{section number in toc}{fg=tugreen, bg=white}
 \setbeamercolor{section in toc}{fg=tugray, bg=white}
+
+% Colors of bibliography (props to https://stackoverflow.com/a/57426792/10176329)
+\setbeamercolor{bibliography item}{fg=tugray}
+\setbeamercolor{bibliography entry author}{fg=tugray}
+\setbeamercolor{bibliography entry title}{fg=tugray}
+\setbeamercolor{bibliography entry location}{fg=tugray}
+\setbeamercolor{bibliography entry note}{fg=tugray}
 
 \mode<all>
